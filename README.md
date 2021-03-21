@@ -1,3 +1,24 @@
+## Fork of the default gatsby starter
+
+- With: `newsq.js` component with a static query that doesn't exist on the homepage
+- `page-2.js` contains a reference to the `newsq.js` component. This will mean `page-2` will have `page-data` referencing the static query ID inside `newsq.js`
+
+## Steps to reproduce the error
+
+- Build the static site `npx gatsby build`
+- Host the static files via any HTTP server (eg. `npx serve public`)
+- Visit the homepage in your browser (eg. `http://localhost:5000/`)
+- Keep this page open whilst continuing with the following steps
+- Go into the code and make a non-whitespace change to the static query in `newsq.js` (eg. change `description` to `title`)
+- Run a cache clear `npx gatsby clean`
+- Run a new build `npx gatsby build`
+- Now try to click into `page-2` in your open browser window
+- You will notice it tries to fetch the old static query but can't and then fails to parse the 404 page HTML as JSON
+
+This will happen to production sites between changes to static query contents. This might also happen in other use cases where the `page-data` is stale and has not been reloaded between two builds. Note: you do not need to be running `gatsby clean` for your public folder to be blown away (the reason the stale static query returns a 404). For example changes to `gatsby-node.js` will also cause an uncached build to run.
+
+---
+
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://www.gatsbyjs.com">
