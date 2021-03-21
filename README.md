@@ -12,7 +12,7 @@
 - Go into the code and make a non-whitespace change to the static query in `newsq.js` (eg. change `description` to `title`)
 - Run a cache clear `npx gatsby clean`
 - Run a new build `npx gatsby build`
-- Now try to click into `page-2` in your open browser window
+- Now try to click into `page-2` in your open browser window via the link on the page
 - You will notice it tries to fetch the old static query but can't and then fails to parse the 404 page HTML as JSON
 
 This will happen to production sites between changes to static query contents. This might also happen in other use cases where the `page-data` is stale and has not been reloaded between two builds. Note: you do not need to be running `gatsby clean` for your public folder to be blown away (the reason the stale static query returns a 404). For example changes to `gatsby-node.js` will also cause an uncached build to run.
